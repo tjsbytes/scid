@@ -290,7 +290,7 @@ proc ::enginewin::createButtonsBar {id btn display} {
         -style Toolbutton -direction above -menu $btn.hash_menu
 
     menu $btn.limits_menu
-    foreach {depth_value} {16 20 24 28 32 36 40} {
+    foreach {depth_value} {30 36 40 42 44 46 50} {
         $btn.limits_menu add command -label "[tr Depth]: $depth_value" -command \
             "::enginewin::changeOption $id _go_limits \[list \[list depth $depth_value \] \]"
     }
