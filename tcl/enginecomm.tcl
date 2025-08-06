@@ -575,6 +575,14 @@ proc ::uci::sendGo {id msgData} {
     } else {
         set limits [join $limits]
     }
+    
+    # FIX: Check if position ends with "moves" without any actual moves
+    # If so, remove the trailing "moves" to avoid the std::bad_alloc error
+    if {[string match "*moves" [string trim $position]] || [string match "*moves " [string trim $position]]} {
+        # Remove trailing "moves" (with optional trailing space)
+        set position [string trim [regsub {\s+moves\s*$} $position ""]]
+    }
+    
     ::engine::rawsend $id $position
     ::engine::rawsend $id "go $limits"
 }
